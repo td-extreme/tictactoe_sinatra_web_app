@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<p>Welcome to Tic Tac Toe</p>
+<p>Please select options below and then click start game</p>
+
+<form action='newgame' method='post'>
+  <ul class='unstyled'>
+
+
+   <p>Opponent</p>
+    <% Player_Choices.each do |id, text| %>
+      <li>
+      <label class='radio'>
+        <input type='radio' name='Player2' value='<%= id %>' id='Player2_<%= id %>' checked />
+        <%= text %>
+      </label>
+      </li>
+    <% end %>
+  </ul>
+  <ul class='unstyled'>
+    <p>Who plays first?</p>
+    <% Player_Order.each do |id, text| %>
+      <label class='radio'>
+        <input type='radio' name='Order' value='<%= id%>' id='Order_<%= id %>' checked />
+        <%= text %>
+      </label>
+    <% end %>
+  </ul>
+  <button type='submit' class='btn btn-primary'>Start the Game!</button>
+</form>
