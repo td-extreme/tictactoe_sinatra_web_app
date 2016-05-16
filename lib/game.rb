@@ -5,14 +5,14 @@ class Game
   attr_accessor :ttt
 
   Player_Order = {
-    'P1' => 'Player',
-    'P2' => 'Opponent',
+    :P1 => 'Player',
+    :P2 => 'Opponent',
   }
 
   Player_Choices = {
-    'HUMAN' => 'Human',
-    'EASY' => 'Computer AI Easy',
-    'HARD' => 'Computer AI Hard',
+    :HUMAN => 'Human',
+    :EASY => 'Computer AI Easy',
+    :HARD => 'Computer AI Hard',
   }
 
   def self.player_order
