@@ -2,5 +2,4 @@
 lib = File.expand_path("../../lib", __FILE__)
 $:.unshift(lib)
 
-system("pwd")
 system("ruby lib/game_controller.rb")
