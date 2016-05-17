@@ -5,11 +5,11 @@ require 'sinatra'
 require 'game'
 
 class GameController < Sinatra::Base
-
   enable :sessions
-
   set :root, File.join(File.dirname(__FILE__), '..')
   set :views, Proc.new { File.join(root, "views") }
+
+  game = Game.new
 
   get '/' do
     @player_choices = Game.player_choices
@@ -18,7 +18,7 @@ class GameController < Sinatra::Base
   end
 
   post '/newgame' do
-    session[:game] = Game.new
+    session[:game] = game
     session[:game].setup_game(params['Order'], params['Player2'])
     session[:game].play_ai_turn
     @images = session[:game].board_images
