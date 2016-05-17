@@ -2,8 +2,6 @@ require 'tictactoe'
 
 class Game
 
-  attr_accessor :ttt
-
   Player_Order = {
     :P1 => 'Player',
     :P2 => 'Opponent',
@@ -36,22 +34,22 @@ class Game
   end
 
   def play_move(move)
-    ttt.play_move(move)
+    @ttt.play_move(move)
   end
 
   def board_images
-    @img = []
+    images = []
     @ttt.get_board.each.with_index do |val, i|
       case val
       when :X
-        @img[i] = "X.png"
+        images[i] = "X.png"
       when :O
-        @img[i] = "O.png"
+        images[i] = "O.png"
       else
-        @img[i] = "number#{i+1}.png"
+        images[i] = "number#{i+1}.png"
       end
     end
-    @img
+    images
   end
 
   def setup_game(order, player2)
