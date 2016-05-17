@@ -1,5 +1,0 @@
-#!/usr/bin/env ruby
-lib = File.expand_path("../../lib", __FILE__)
-$:.unshift(lib)
-
-system("ruby lib/game_controller.rb")
