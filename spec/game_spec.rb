@@ -1,51 +1,78 @@
-ENV['RACK_ENV'] = 'test'
-
 require 'game'
-require 'rack/test'
 
-describe "Testing Tic Tac Toe sinatra web app" do
-  include Rack::Test::Methods
+describe Game do
 
-  def app
-    Sinatra::Application
+  let (:ttt) { double }
+  let (:test_board) { [:X, :O, :X, ' ', ' ', ' ', :O, :X, :O] }
+
+  describe "end_of_game" do
+    it "returns 'Tied Game!' when the game is tied" do
+      subject.instance_variable_set("@ttt", ttt)
+      expect(ttt).to receive(:tied_game?).and_return(true)
+      expect(subject.results).to eq("Tied Game!")
+    end
+
+    it "returns 'Player X is the Winner!' when X is the winner" do
+      subject.instance_variable_set("@ttt", ttt)
+      expect(ttt).to receive(:tied_game?).and_return(false)
+      expect(ttt).to receive(:winner).and_return(:X)
+      expect(subject.results).to eq("Player X is the Winner!")
+    end
   end
 
-  let (:game) { double }
+  describe "play_ai_move" do
+    it "Does NOT call play_move is the game is over" do
+      subject.instance_variable_set("@ttt", ttt)
+      expect(ttt).to receive(:game_over?).and_return(true)
+      expect(ttt).to receive(:is_current_player_ai?).and_return(true)
+      expect(ttt).not_to receive(:play_move)
+      subject.play_ai_turn
+    end
 
-  it "Displays the welcome screen" do
-    get '/'
-    expect(last_response).to be_ok
-    expect(last_response.body).to include("Welcome")
-  end
-
-  describe "New Game" do
-
-    it "post /newgame returns a response" do
-      app.class_variable_set("@@game", game)
-      post '/newgame' 
-      expect(last_response).to be_ok
+    it "Does NOT call play_move if the player is NOT Ai" do
+      subject.instance_variable_set("@ttt", ttt)
+      allow(ttt).to receive(:game_over?).and_return(true)
+      expect(ttt).to receive(:is_current_player_ai?).and_return(false)
+      expect(ttt).not_to receive(:play_move)
+      subject.play_ai_turn
     end
  
-    it "Game is in playing mode after post /newgame" do
-      app.class_variable_set("@@game", game)
-      post '/newgame' 
-      expect(last_response.body).to include("playmove")
+    it "Does call play_move if the player is AI  and game is not over" do
+      subject.instance_variable_set("@ttt", ttt)
+      allow(ttt).to receive(:game_over?).and_return(false)
+      expect(ttt).to receive(:is_current_player_ai?).and_return(true)
+      expect(ttt).to receive(:play_move)
+      expect(ttt).to receive(:get_ai_player_move)
+      subject.play_ai_turn
     end
- end
+  end
 
-  describe "playing the game" do
-    it "Game asks to play again after it is over" do
-      app.class_variable_set("@@game", game)
-      allow(game).to receive(:play_move)
-      allow(game).to receive(:play_ai_turn)
-      allow(game).to receive(:is_current_player_ai?)
-      allow(game).to receive(:get_board).and_return(['','','','','','','','',''])
-      expect(game).to receive(:game_over?).and_return(true)
-      allow(game).to receive(:tied_game?)
-      allow(game).to receive(:winner)
-      post '/playmove', 'move' => '3'
-      expect(last_response.body).to include("New Game!")
+  describe "board_images" do
+    it "returns an arrray of length 9" do
+      subject.instance_variable_set("@ttt", ttt)
+      expect(ttt).to receive(:get_board).and_return(test_board)
+      expect(subject.board_images.length).to eq(9)
+    end
+
+    it "index 0 is 'X.png' when ttt.baord[0] = :X" do
+      subject.instance_variable_set("@ttt", ttt)
+      expect(ttt).to receive(:get_board).and_return(test_board)
+      img = subject.board_images
+      expect(img[0]).to eq("X.png")
+    end
+
+    it "index 1 is 'O.png' when ttt.baord[1] = :O" do
+      subject.instance_variable_set("@ttt", ttt)
+      expect(ttt).to receive(:get_board).and_return(test_board)
+      img = subject.board_images
+      expect(img[1]).to eq("O.png")
+    end
+
+    it "index 4 is 'number5.png' when ttt.baord[4] = ' '" do
+      subject.instance_variable_set("@ttt", ttt)
+      expect(ttt).to receive(:get_board).and_return(test_board)
+      img = subject.board_images
+      expect(img[4]).to eq("number5.png")
     end
   end
 end
-
