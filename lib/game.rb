@@ -2,24 +2,16 @@ require 'tictactoe'
 
 class Game
 
-  Player_Order = {
+  PLAYER_ORDER = {
     :P1 => 'Player',
     :P2 => 'Opponent',
   }
 
-  Player_Choices = {
+  PLAYER_CHOCIES = {
     :HUMAN => 'Human',
     :EASY => 'Computer AI Easy',
     :HARD => 'Computer AI Hard',
   }
-
-  def self.player_order
-    Player_Order
-  end
-
-  def self.player_choices
-    Player_Choices
-  end
 
   def game_over?
     @ttt.game_over?

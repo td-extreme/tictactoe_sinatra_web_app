@@ -12,8 +12,8 @@ class GameController < Sinatra::Base
   game = Game.new
 
   get '/' do
-    @player_choices = Game.player_choices
-    @player_order = Game.player_order
+    @player_choices = Game::PLAYER_CHOCIES
+    @player_order = Game::PLAYER_ORDER
     erb :index
   end
 
