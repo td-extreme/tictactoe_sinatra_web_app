@@ -1,13 +1,13 @@
 ENV['RACK_ENV'] = 'test'
 require 'sinatra'
 require 'rack/test'
-require 'game_controller'
+require './app'
 
-describe GameController do
+describe TTTWeb do
   include Rack::Test::Methods
 
   def app
-    GameController
+    TTTWeb
   end
 
   it "Displays the welcome screen" do
