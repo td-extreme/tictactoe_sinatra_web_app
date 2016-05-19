@@ -1,6 +1,9 @@
 require 'tictactoe'
 
 class Game
+  extend Forwardable
+
+  def_delegators :@ttt, :game_over?, :play_move, :get_board
 
   PLAYER_ORDER = {
     :P1 => 'Player',
@@ -13,35 +16,12 @@ class Game
     :HARD => 'Computer AI Hard',
   }
 
-  def game_over?
-    @ttt.game_over?
-  end
-
   def results
     @ttt.tied_game? ? "Tied Game!" : "Player #{@ttt.winner} is the Winner!"
   end
 
   def play_ai_turn
     @ttt.play_move(@ttt.get_ai_player_move) if @ttt.is_current_player_ai? && !@ttt.game_over?
-  end
-
-  def play_move(move)
-    @ttt.play_move(move)
-  end
-
-  def board_images
-    images = []
-    @ttt.get_board.each.with_index do |val, i|
-      case val
-      when :X
-        images[i] = "X.png"
-      when :O
-        images[i] = "O.png"
-      else
-        images[i] = "number#{i+1}.png"
-      end
-    end
-    images
   end
 
   def setup_game(order, player2)
