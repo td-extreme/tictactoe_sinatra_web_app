@@ -1,5 +1,5 @@
 class BoardImages
-  def self.get_images(board)
+  def get_images(board)
     images = []
     board.each.with_index do |val, i|
       case val

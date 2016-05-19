@@ -21,7 +21,7 @@ class GameController < Sinatra::Base
     session[:game] = game
     session[:game].setup_game(params['Order'], params['Player2'])
     session[:game].play_ai_turn
-    @images = BoardImages::get_images(session[:game].get_board)
+    @images = BoardImages.new.get_images(session[:game].get_board)
     erb :play_move
   end
 
@@ -29,7 +29,7 @@ class GameController < Sinatra::Base
     @message = "That is not a valid move!" if !session[:game].play_move(params['move'].to_i - 1)
     session[:game].play_ai_turn
     @results = session[:game].results
-    @images = BoardImages::get_images(session[:game].get_board)
+    @images = BoardImages.new.get_images(session[:game].get_board)
     session[:game].game_over? ? (erb :play_again) : (erb :play_move)
   end
 end
