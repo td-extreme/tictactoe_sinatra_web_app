@@ -1,13 +1,8 @@
-lib = File.expand_path("../../lib", __FILE__)
-$:.unshift(lib)
-
 require 'sinatra'
-require 'game'
+require './lib/game'
 
-class GameController < Sinatra::Base
+class TTTWeb < Sinatra::Base
   enable :sessions
-  set :root, File.join(File.dirname(__FILE__), '..')
-  set :views, Proc.new { File.join(root, "views") }
 
   game = Game.new
 

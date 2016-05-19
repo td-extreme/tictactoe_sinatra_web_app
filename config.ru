@@ -1,2 +1,2 @@
-require './lib/game_controller.rb'
-GameController.run!
+require './app.rb'
+TTTWeb.run!
