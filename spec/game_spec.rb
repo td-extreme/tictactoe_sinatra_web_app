@@ -46,33 +46,4 @@ describe Game do
       subject.play_ai_turn
     end
   end
-
-  describe "board_images" do
-    it "returns an arrray of length 9" do
-      subject.instance_variable_set("@ttt", ttt)
-      expect(ttt).to receive(:get_board).and_return(test_board)
-      expect(subject.board_images.length).to eq(9)
-    end
-
-    it "index 0 is 'X.png' when ttt.baord[0] = :X" do
-      subject.instance_variable_set("@ttt", ttt)
-      expect(ttt).to receive(:get_board).and_return(test_board)
-      img = subject.board_images
-      expect(img[0]).to eq("X.png")
-    end
-
-    it "index 1 is 'O.png' when ttt.baord[1] = :O" do
-      subject.instance_variable_set("@ttt", ttt)
-      expect(ttt).to receive(:get_board).and_return(test_board)
-      img = subject.board_images
-      expect(img[1]).to eq("O.png")
-    end
-
-    it "index 4 is 'number5.png' when ttt.baord[4] = ' '" do
-      subject.instance_variable_set("@ttt", ttt)
-      expect(ttt).to receive(:get_board).and_return(test_board)
-      img = subject.board_images
-      expect(img[4]).to eq("number5.png")
-    end
-  end
 end
