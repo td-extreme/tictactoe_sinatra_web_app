@@ -1,9 +1,10 @@
 require 'tictactoe'
 
-class Game extend Forwardable
+class Game
+  extend Forwardable
 
   def_delegators :@ttt, :game_over?, :play_move, :get_board
-  
+
   PLAYER_ORDER = {
     :P1 => 'Player',
     :P2 => 'Opponent',
