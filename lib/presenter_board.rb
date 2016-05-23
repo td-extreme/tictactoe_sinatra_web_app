@@ -1,5 +1,4 @@
 class PresenterBoard
-
   attr_reader :images
 
   def initialize(board)
