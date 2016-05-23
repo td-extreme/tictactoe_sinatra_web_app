@@ -27,8 +27,6 @@ class TTTWeb < Sinatra::Base
     @results = session[:game].results
     board = session[:game].get_board
     @presenter_board = PresenterBoard.new(board)
-
-#   @presenter_board = PresenterBoard.new(seesion[:game].get_board)
     session[:game].game_over? ? (erb :play_again) : (erb :play_move)
   end
 end
