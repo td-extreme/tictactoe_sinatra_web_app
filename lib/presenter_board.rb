@@ -14,6 +14,5 @@ class PresenterBoard
         @images[i] = "number#{i+1}.png"
       end
     end
-    @images
   end
 end
