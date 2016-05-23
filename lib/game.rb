@@ -10,7 +10,7 @@ class Game
   end
 
   def setup_game(order, player2)
-    if order == 'P1'
+    if order == "p1"
       player1 = :human
     else
       player1 = player2
