@@ -2,9 +2,6 @@ require 'sinatra'
 require './lib/game'
 require './lib/index_presenter'
 require './lib/game_view_selector'
-# require './lib/board_images'
-# require './lib/play_move_presenter'
-# require './lib/play_again_presenter'
 
 class TTTWeb < Sinatra::Base
   enable :sessions
