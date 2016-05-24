@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<%= erb :board %>
-<p> <%= @results %> </p>
+<%= erb( :board, :locals => { :images => @presenter.images }) %>
+<p> <%= @presenter.results %> </p>
 
 <form action="/" method='get'><button type='submit' class='btn btn-primary'>New Game!</button></form>

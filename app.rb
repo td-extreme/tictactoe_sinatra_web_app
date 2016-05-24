@@ -1,14 +1,16 @@
 require 'sinatra'
 require './lib/game'
-require 'board_images'
+require './lib/index_presenter'
+require './lib/play_move_presenter'
+require './lib/play_again_presenter'
+
 class TTTWeb < Sinatra::Base
   enable :sessions
 
   game = Game.new
 
   get '/' do
-    @player_choices = Game::PLAYER_CHOCIES
-    @player_order = Game::PLAYER_ORDER
+    @presenter_index = IndexPresenter.new
     erb :index
   end
 
@@ -16,15 +18,23 @@ class TTTWeb < Sinatra::Base
     session[:game] = game
     session[:game].setup_game(params['Order'], params['Player2'])
     session[:game].play_ai_turn
-    @images = BoardImages.new.get_images(session[:game].get_board)
+    @presenter = PlayMovePresenter.new(game)
     erb :play_move
   end
 
   post '/playmove' do
-    @message = "That is not a valid move!" if !session[:game].play_move(params['move'].to_i - 1)
+    played_move = session[:game].play_move(params['move'].to_i - 1)
     session[:game].play_ai_turn
-    @results = session[:game].results
-    @images = BoardImages.new.get_images(session[:game].get_board)
-    session[:game].game_over? ? (erb :play_again) : (erb :play_move)
+    if session[:game].game_over?
+      redirect :play_again
+    else
+      @presenter = PlayMovePresenter.new(session[:game], played_move)
+      erb :play_move
+    end
+  end
+
+  get '/play_again' do
+    @presenter = PlayAgainPresenter.new(session[:game])
+    erb :play_again
   end
 end
