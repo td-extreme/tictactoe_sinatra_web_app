@@ -1,4 +1,4 @@
-require 'board_images'
+require 'spec_helper'
 
 describe BoardImages do
 

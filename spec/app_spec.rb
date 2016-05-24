@@ -1,7 +1,7 @@
 ENV['RACK_ENV'] = 'test'
 require 'sinatra'
 require 'rack/test'
-require './app'
+require 'spec_helper'
 
 describe TTTWeb do
   include Rack::Test::Methods

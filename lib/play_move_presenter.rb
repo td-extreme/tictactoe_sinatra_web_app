@@ -1,4 +1,4 @@
-require './lib/board_images'
+require 'board_images'
 
 class PlayMovePresenter
 
