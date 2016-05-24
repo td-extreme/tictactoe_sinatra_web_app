@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'play_move_presenter'
 
 describe PlayMovePresenter do
   let (:game) { double }

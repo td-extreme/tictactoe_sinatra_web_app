@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'play_again_presenter'
 
 describe PlayAgainPresenter do
   let (:game) { double }

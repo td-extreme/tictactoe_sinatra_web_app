@@ -1,4 +1,4 @@
-require 'board_images'
+require_relative './board_images'
 
 class PlayAgainPresenter
 
