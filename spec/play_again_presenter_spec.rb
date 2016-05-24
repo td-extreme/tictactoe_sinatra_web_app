@@ -1,8 +1,8 @@
-require 'presenter_play_again'
+require 'play_again_presenter'
 
-describe PresenterPlayAgain do
+describe PlayAgainPresenter do
   let (:game) { double }
-  let (:presenter) { PresenterPlayAgain.new(game) }
+  let (:presenter) { PlayAgainPresenter.new(game) }
 
   it "results = 'Tied Game!' when game is tied" do
     expect(game).to receive(:tied_game?).and_return(true)

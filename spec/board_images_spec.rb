@@ -1,9 +1,9 @@
-require 'presenter_board'
+require 'board_images'
 
-describe PresenterBoard do
+describe BoardImages do
 
   let (:test_board) { [:X, :O, :X, ' ', ' ', ' ', :O, :X, :O] }
-  let (:test_presenter) { PresenterBoard.new(test_board) }
+  let (:test_presenter) { BoardImages.new(test_board) }
   it "returns an arrray of length 9" do
     expect(test_presenter.images.length).to eq(9)
   end

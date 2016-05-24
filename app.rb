@@ -1,9 +1,10 @@
 require 'sinatra'
 require './lib/game'
-require './lib/presenter_board'
-require './lib/presenter_index'
-require './lib/presenter_play_move'
-require './lib/presenter_play_again'
+require './lib/index_presenter'
+require './lib/game_view_selector'
+# require './lib/board_images'
+# require './lib/play_move_presenter'
+# require './lib/play_again_presenter'
 
 class TTTWeb < Sinatra::Base
   enable :sessions
@@ -11,7 +12,7 @@ class TTTWeb < Sinatra::Base
   game = Game.new
 
   get '/' do
-    @presenter_index = PresenterIndex.new
+    @presenter_index = IndexPresenter.new
     erb :index
   end
 
@@ -19,19 +20,20 @@ class TTTWeb < Sinatra::Base
     session[:game] = game
     session[:game].setup_game(params['Order'], params['Player2'])
     session[:game].play_ai_turn
-    board = session[:game].get_board
-    @presenter_board = PresenterBoard.new(board)
-    @presenter_play_move = PresenterPlayMove.new
-    erb :play_move
+    load_game_view(true)
   end
 
   post '/playmove' do
     played_move = session[:game].play_move(params['move'].to_i - 1)
     session[:game].play_ai_turn
-    @presenter_play_move = PresenterPlayMove.new(played_move)
-    @presenter_play_again = PresenterPlayAgain.new(session[:game])
-    board = session[:game].get_board
-    @presenter_board = PresenterBoard.new(board)
-    session[:game].game_over? ? (erb :play_again) : (erb :play_move)
+    load_game_view(played_move)
+  end
+
+  private 
+  
+  def load_game_view(played_move)
+    selector = GameViewSelector.new(session[:game], played_move)
+    @presenter = selector.presenter
+    erb selector.view
   end
 end

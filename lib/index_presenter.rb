@@ -1,4 +1,4 @@
-class PresenterIndex
+class IndexPresenter
 
   attr_accessor :player_order, :player_choices
 

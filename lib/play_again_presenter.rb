@@ -1,4 +1,6 @@
-class PresenterPlayAgain
+class PlayAgainPresenter
+
+  attr_accessor :images
 
   def initialize(game)
     @game = game

@@ -1,4 +1,4 @@
-class PresenterBoard
+class BoardImages
   attr_reader :images
 
   def initialize(board)

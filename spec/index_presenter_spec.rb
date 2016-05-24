@@ -1,6 +1,6 @@
-require 'presenter_index'
+require 'index_presenter'
 
-describe PresenterIndex do
+describe IndexPresenter do
   it 'it sets the player_order options' do
     expect(subject.player_order).to be
   end

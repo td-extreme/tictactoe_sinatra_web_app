@@ -1,4 +1,6 @@
-class PresenterPlayMove 
+class PlayMovePresenter
+
+  attr_accessor :images
 
   def initialize(move_played = true)
     @move_played = move_played

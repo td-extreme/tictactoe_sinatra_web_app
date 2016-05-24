@@ -1,8 +1,8 @@
 <!DOCTYPE html>
+<%= erb( :board, :locals => { :images => @presenter.images }) %>
 
-<%= erb :board %>
 <p> Click a number above, or enter the number in the text box and click the play move button </p>
-<p> <%= @presenter_play_move.message %> </p>
+<p> <%= @presenter.message %> </p>
 
 <form id="play" action="playmove" method='post'><textarea id="input" name="move" cols="1" rows="1"></textarea><button type='submit' class='btn btn-primary'>Play Move!</button></form>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
