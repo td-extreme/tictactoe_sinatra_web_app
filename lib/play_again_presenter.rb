@@ -1,9 +1,13 @@
-class PlayAgainPresenter
+require './lib/board_images'
 
-  attr_accessor :images
+class PlayAgainPresenter
 
   def initialize(game)
     @game = game
+  end
+
+  def images
+    BoardImages.new(@game.get_board).images
   end
 
   def results
