@@ -1,21 +1,30 @@
 require 'tictactoe'
-
 class Game
   extend Forwardable
 
-  def_delegators :@ttt,:tied_game?, :game_over?, :play_move, :get_board, :winner
+  def_delegators :@ttt,:tied_game?, :game_over?, :play_move, :get_board, :winner, :valid_move?
 
-  def play_ai_turn
-    @ttt.play_move(@ttt.get_ai_player_move) if @ttt.is_current_player_ai? && !@ttt.game_over?
+  def initialize(rules, board, opponent, order)
+    @ai_player = opponent
+    @ttt = TicTacToe.new(rules, board)
+    play_ai_move if order == :p2 && @ai_player != :human
   end
 
-  def setup_game(order, player2)
-    if order == "p1"
-      player1 = :human
-    else
-      player1 = player2
-      player2 = :human
+  def play_round(move)
+    if valid_move?(move)
+      ttt.play_move(move)
+      play_ai_move if !(ttt.game_over?) && @ai_player != :human
+      true
     end
-    @ttt = TicTacToe.new(player1, player2)
+    false
   end
+
+  def play_ai_move
+    game_state = ttt.get_game_state
+    move = ai_player.get_move(game_state)
+    play_move(move)
+  end
+
+  private
+  attr_accessor :ttt, :ai_player
 end

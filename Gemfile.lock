@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/td-extreme/TicTacToe_Ruby_v2.git
-  revision: d036a74a4efbeee8721816c987496d08aa6e1893
+  revision: cd534a7a7a19789e216effa65a33efed8abcc318
   specs:
-    TicTacToe (1.0.2)
+    TicTacToe (1.0.4)
 
 GEM
   remote: https://rubygems.org/
@@ -36,7 +36,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  TicTacToe (= 1.0.2)!
+  TicTacToe (= 1.0.4)!
   rack-test
   rspec
   sinatra
