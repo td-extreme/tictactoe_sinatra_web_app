@@ -14,9 +14,7 @@ class Game
     if valid_move?(move)
       ttt.play_move(move)
       play_ai_move if !(ttt.game_over?) && @ai_player != :human
-      true
     end
-    false
   end
 
   def play_ai_move

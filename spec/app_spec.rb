@@ -26,26 +26,13 @@ describe TTTWeb do
       expect(last_response.body).to include("playmove")
     end
   end
-
-  describe "playmove" do
-    it "displays that is an invalid move if user inputs a move already played" do
-      post '/newgame', 'Order' => :P1, 'Player2' => :human
-      post '/playmove', 'move' => '4'
-      post '/playmove', 'move' => '4'
-      expect(last_response.body).to include("not a valid move")
-    end
-
-    it "does NOT display invalid message if move is allowed" do
-      post '/newgame', 'Order' => :P1, 'Player2' => :human
-      post '/playmove', 'move' => '4'
-      expect(last_response.body).not_to include("not a valid move")
-    end
-  end
-
   describe "playing the game" do
     it "Game asks to play a New Game after it is over" do
       post '/newgame', 'Order' => :P1, 'Player2' => :human
-      get '/play_again'
+      for i in 0..8
+       post '/playmove', 'move' => i
+      end 
+      get '/board'
       expect(last_response.body).to include("New Game")
     end
 

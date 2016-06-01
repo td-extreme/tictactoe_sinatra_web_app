@@ -21,7 +21,7 @@ class TTTWeb < Sinatra::Base
   end
 
   post '/playmove' do
-    @played_move = session[:game].play_round(params['move'].to_i - 1)
+    session[:game].play_round(params['move'].to_i - 1)
     redirect :board
   end
 
@@ -30,7 +30,7 @@ class TTTWeb < Sinatra::Base
        @presenter = PlayAgainPresenter.new(session[:game])
        erb :play_again
     else
-      @presenter = PlayMovePresenter.new(session[:game], @played_move)
+      @presenter = PlayMovePresenter.new(session[:game])
       erb :play_move
     end
   end
