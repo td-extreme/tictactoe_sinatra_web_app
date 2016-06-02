@@ -17,7 +17,7 @@ class TTTWeb < Sinatra::Base
     setup = GameSetup.new(params['Order'], params['Player2'])
     session[:game] = setup.game
     @presenter = PlayMovePresenter.new(session[:game])
-    redirect :board
+    erb :play_move
   end
 
   post '/playmove' do
