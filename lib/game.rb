@@ -7,7 +7,7 @@ class Game
   def initialize(rules, board, opponent, order)
     @ai_player = opponent
     @ttt = TicTacToe.new(rules, board)
-    play_ai_move if order == :p2 && @ai_player != :human
+    play_ai_move if order == "p2" && @ai_player != :human
   end
 
   def play_round(move)
